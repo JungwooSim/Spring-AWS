@@ -18,6 +18,11 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('awsSpringVersion', '2.3.3')
+    set('testcontainersVersion', '1.16.3')
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
@@ -26,9 +31,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    implementation 'org.springframework.cloud:spring-cloud-starter-aws'
-    implementation 'org.springframework.cloud:spring-cloud-starter-aws-messaging'
-    implementation 'org.springframework.cloud:spring-cloud-starter-aws-parameter-store-config'
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-aws-messaging', version: '2.2.6.RELEASE'
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
 }
 
 tasks.named('test') {
