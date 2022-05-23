@@ -1,6 +1,5 @@
 package com.example.simplequeueservice.handler;
 
-import com.amazonaws.services.sqs.model.SendMessageResult;
 import com.example.simplequeueservice.dto.MessageDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
@@ -8,20 +7,25 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
 @SpringBootTest
-class MessageSenderTest {
+class MessageReceiverTest {
     @Autowired
     private MessageSender messageSender;
 
+    @Autowired
+    private MessageReceiver messageReceiver;
+
     @Test
-    void send() throws JsonProcessingException {
+    void receiveMessage() throws JsonProcessingException {
         //given
         MessageDto messageDto = new MessageDto("Hello World");
+        this.messageSender.send(messageDto);
 
         //when
-        SendMessageResult sendMessageResult = this.messageSender.send(messageDto);
+        MessageDto receivedMessageDto = messageReceiver.receive();
 
         //then
-        Assertions.assertNotNull(sendMessageResult.getMessageId());
+        Assertions.assertEquals("Hello World", receivedMessageDto.getStr());
     }
 }

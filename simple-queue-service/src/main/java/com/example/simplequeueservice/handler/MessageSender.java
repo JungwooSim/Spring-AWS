@@ -3,7 +3,7 @@ package com.example.simplequeueservice.handler;
 import com.amazonaws.services.sqs.AmazonSQSAsync;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.amazonaws.services.sqs.model.SendMessageResult;
-import com.example.simplequeueservice.dto.SendMessageDto;
+import com.example.simplequeueservice.dto.MessageDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +20,12 @@ public class MessageSender {
 
     private final AmazonSQSAsync amazonSQSAsync;
 
-    public SendMessageResult send(final SendMessageDto sendMessageDto) throws JsonProcessingException {
+    public SendMessageResult send(final MessageDto messageDto) throws JsonProcessingException {
 
         SendMessageRequest sendMessageRequest = new SendMessageRequest()
                 .withMessageGroupId("1")
                 .withQueueUrl(QUEUE_NAME)
-                .withMessageBody(objectMapper.writeValueAsString(sendMessageDto));
+                .withMessageBody(objectMapper.writeValueAsString(messageDto));
 
         SendMessageResult sendMessageResult = amazonSQSAsync.sendMessage(sendMessageRequest);
 
