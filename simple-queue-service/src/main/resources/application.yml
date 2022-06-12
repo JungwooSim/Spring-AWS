@@ -5,3 +5,9 @@ cloud:
     region:
       static: ap-northeast-2
       auto: false
+    stack:
+      auto: false
+    sqs:
+      queue:
+        name: test-sqs.fifo
+        url: https://sqs.ap-northeast-2.amazonaws.com/660548980558/test-sqs.fifo
