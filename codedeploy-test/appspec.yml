@@ -1,0 +1,8 @@
+version: 0.0
+os: linux
+
+hooks:
+  ApplicationStart:
+    - location: deploy.sh
+      timeout: 100
+      runas: ec2-user
