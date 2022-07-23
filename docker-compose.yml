@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  spring-hello:
+    container_name: spring-hello
+    image: spring-hello:latest
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    logging:
+      options:
+        max-size: "512m"
